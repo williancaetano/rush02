@@ -1,18 +1,18 @@
 #include "rush02.h"
 
-void verify_number(int *nb, int argc, char *argv[], char **dicionary)
+void verify_number(int *nb, int argc, char *argv[], char **dictionary)
 {
     if(argc == 2)
     {
         *nb = ft_atoi(argv[1]);
-        *dicionary = ft_strdup("numbers.dict");
+        *dictionary = ft_strdup("numbers.dict");
     }
     if (argc == 3)
     {
         *nb = ft_atoi(argv[2]);
-        *dicionary = argv[1];
+        *dictionary = argv[1];
     }
-    (void)dicionary;
+    (void)dictionary;
 }
 
 //para tirar espaço em branco
@@ -103,9 +103,9 @@ char    *ft_epur_str(char *content)
 // }
 
 
-void    ft_lstadd_back(t_dicionary **lst, t_dicionary *new)
+void    ft_lstadd_back(t_dictionary **lst, t_dictionary *new)
 {
-    t_dicionary    *first;
+    t_dictionary    *first;
 
     if (new == NULL || lst == NULL)
         return ;
@@ -122,11 +122,14 @@ void    ft_lstadd_back(t_dicionary **lst, t_dicionary *new)
 }
 
 
-void create_dicionary(char** dictionary_line, t_dicionary **head) {
+void create_dictionary(char** dictionary_line, t_dictionary **head) {
   
-    t_dicionary* entry = (t_dicionary*)malloc(sizeof(t_dicionary));
+    t_dictionary* entry = (t_dictionary*)malloc(sizeof(t_dictionary));
     entry->nb = ft_atoi(ft_epur_str(dictionary_line[0]));
-    entry->str_number = ft_strdup(ft_epur_str(dictionary_line[1]));
+    entry->str_number = ft_strdup(ft_strtrim(ft_epur_str(dictionary_line[1]), "\n"));
+
+                            
+
     entry->next = NULL;
 
     free(dictionary_line[0]);
@@ -136,9 +139,9 @@ void create_dicionary(char** dictionary_line, t_dicionary **head) {
 }
 
 
-void bubble_sort(t_dicionary** head) {
+void bubble_sort(t_dictionary** head) {
     int swapped = 1;
-    t_dicionary* lptr = NULL;
+    t_dictionary* lptr = NULL;
     int temp_nb;
     char* temp_str;
 
@@ -147,10 +150,10 @@ void bubble_sort(t_dicionary** head) {
 
     while (swapped) {
         swapped = 0;
-        t_dicionary* current = *head;
+        t_dictionary* current = *head;
 
         while (current->next != lptr) {
-            if (current->nb > current->next->nb)
+            if (current->nb < current->next->nb)
             {
                 // Trocar os valores dos nós
                 temp_nb = current->nb;
@@ -173,8 +176,8 @@ void bubble_sort(t_dicionary** head) {
 }
 
 //teste de impressão
-void print_dicionary(t_dicionary* head) {
-    t_dicionary* current = head;
+void print_dictionary(t_dictionary* head) {
+    t_dictionary* current = head;
 
     while (current != NULL) {
         printf("nb: %d, str_number: %s\n", current->nb, current->str_number);

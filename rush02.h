@@ -13,11 +13,11 @@
 #include <string.h>
 
 
-typedef struct s_dicionary{
+typedef struct s_dictionary{
 	int nb;
 	char* str_number;
-	struct s_dicionary *next;
-}t_dicionary;
+	struct s_dictionary *next;
+}t_dictionary;
 
 size_t	ft_strlen(const char *s);
 
@@ -30,7 +30,7 @@ char	*ft_strjoin(char *s1, char const *s2);
 char	*get_next_line(int fd);
 
 
-void    verify_number(int *nb, int argc, char *argv[], char **dicionary);
+void    verify_number(int *nb, int argc, char *argv[], char **dictionary);
 int     ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
 char	*get_next_line(int fd);
@@ -39,8 +39,8 @@ char	**ft_split(const char *s, char c);
 char    *ft_strtrim(char const *s1, char const *set);
 void    ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t number, size_t size);
-void create_dicionary(char** dictionary_line, t_dicionary **head);
-void    ft_lstadd_back(t_dicionary **lst, t_dicionary *new);
-void bubble_sort(t_dicionary** head);
-void print_dicionary(t_dicionary* head); //teste de impreção do dicionario
+void create_dictionary(char** dictionary_line, t_dictionary **head);
+void    ft_lstadd_back(t_dictionary **lst, t_dictionary *new);
+void bubble_sort(t_dictionary** head);
+void print_dictionary(t_dictionary* head); //teste de impreção do dicionario
 #endif

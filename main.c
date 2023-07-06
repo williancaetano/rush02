@@ -4,23 +4,22 @@
 int main(int argc, char* argv[]){
 
     int nb;
-    char *dicionary_file = NULL;
+    char *dictionary_file = NULL;
     char *result = "";
-    char **dicionary_splited;
-    t_dicionary **dicionary;
+    char **dictionary_splited;
+    t_dictionary **dictionary;
 
     if (argc < 2 || argc > 3) {
-        write(1, "Erro\n", 5);
+        write(1, "Error\n", 6);
         return 1;
     }
     else{
-        verify_number(&nb, argc, argv, &dicionary_file);
+        verify_number(&nb, argc, argv, &dictionary_file);
         //se for 1 argumento    
-        int file = open(dicionary_file, O_RDONLY);
-        printf("%i\n", file);
+        int file = open(dictionary_file, O_RDONLY);
         if(file > 0)
         {
-            dicionary = malloc(sizeof(t_dicionary));
+            dictionary = malloc(sizeof(t_dictionary));
 
             while(result){
                 result = get_next_line(file);
@@ -28,78 +27,22 @@ int main(int argc, char* argv[]){
                     break;
                 if(result[0] == '\n')
                     continue;
-                dicionary_splited = ft_split(result, ':');
-                create_dicionary(dicionary_splited,dicionary);
-                printf("%s\n", result);
+                dictionary_splited = ft_split(result, ':');
+                create_dictionary(dictionary_splited,dictionary);
             }  
-
-            printf("antes da ordenação\n");
-            print_dicionary(*dicionary);
-    
-
-            bubble_sort(dicionary);
-            //ordenar a lista
+            bubble_sort(dictionary);
+            print_dictionary(*dictionary);
             
-            printf("depois da ordenação\n");
-            print_dicionary(*dicionary);
-            
+            t_dictionary* current = *dictionary;
+            while (current != NULL) {
+                //printf("nb: %d, str_number: %s\n", current->nb, current->str_number);
+                if()
+                
+                
+                current = current->next;
+            }
+        
         } 
 
     }
 }
-
-
-
-// dicionary = malloc(sizeof(t_dicionary));
-
-// dicionary.nb = 100;
-
-// dicionary.nb = 1000;
-// dicionary.str_number = 457;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
