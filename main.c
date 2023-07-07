@@ -97,7 +97,6 @@ int main(int argc, char* argv[]){
             
             free1d(dictionary_file);
             free(dictionary);
-            
 		}
 	}
     return (0);
