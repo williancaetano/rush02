@@ -1,16 +1,14 @@
 #include "rush02.h"
 
-void verify_number(int *nb, int argc, char *argv[], char **dictionary, char **str_nb)
+void verify_number(int argc, char *argv[], char **dictionary, char **str_nb)
 {
     if(argc == 2)
     {
-        *nb = ft_atoi(argv[1]);
         *str_nb = argv[1];
         *dictionary = ft_strdup("numbers.dict");
     }
     if (argc == 3)
     {
-        *nb = ft_atoi(argv[2]);
         *str_nb = argv[2];
         *dictionary = argv[1];
     }
@@ -277,7 +275,8 @@ void print_dictionary(t_dictionary* number, t_dictionary* dictionary) {
 
     while (current != NULL) {
         print_100(current->str_number, dictionary);
-        print_sufix(current->nb, dictionary);
+        if(atoi(current->str_number) != 0)
+            print_sufix(current->nb, dictionary);
         current = current->next;
     }
     printf("\n");

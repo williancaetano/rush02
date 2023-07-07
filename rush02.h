@@ -31,7 +31,7 @@ char	*ft_strjoin(char *s1, char const *s2);
 char	*get_next_line(int fd);
 
 
-void    verify_number(int *nb, int argc, char *argv[], char **dictionary, char **str);
+void    verify_number(int argc, char *argv[], char **dictionary, char **str);
 int     ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
 char	*get_next_line(int fd);
