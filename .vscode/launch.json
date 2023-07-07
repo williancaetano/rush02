@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/rush02",
-            "args": ["42"],
+            "args": ["21"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <limits.h>
 
 
 typedef struct s_dictionary{
@@ -30,7 +31,7 @@ char	*ft_strjoin(char *s1, char const *s2);
 char	*get_next_line(int fd);
 
 
-void    verify_number(int *nb, int argc, char *argv[], char **dictionary);
+void    verify_number(int *nb, int argc, char *argv[], char **dictionary, char **str);
 int     ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
 char	*get_next_line(int fd);
@@ -42,5 +43,7 @@ void	*ft_calloc(size_t number, size_t size);
 void create_dictionary(char** dictionary_line, t_dictionary **head);
 void    ft_lstadd_back(t_dictionary **lst, t_dictionary *new);
 void bubble_sort(t_dictionary** head);
-void print_dictionary(t_dictionary* head); //teste de impreção do dicionario
+void print_dictionary(t_dictionary* number, t_dictionary* dictionary); //teste de impreção do dicionario
+void	ft_lstadd_front(t_dictionary **lst, t_dictionary *new);
+char* charToString(char c);
 #endif
