@@ -142,22 +142,22 @@ void create_dictionary(char** dictionary_line, t_dictionary **head) {
     free(dictionary_line[0]);
     free(dictionary_line[1]);     
 
-    ft_lstadd_back(head, entry);
+    ft_lstadd_front(head, entry);
 }
 
 
-void bubble_sort(t_dictionary** head) {
+void bubble_sort(t_dictionary *head) {
     int swapped = 1;
     t_dictionary* lptr = NULL;
     int temp_nb;
     char* temp_str;
 
-    if (*head == NULL)
+    if (head == NULL)
         return;
 
     while (swapped) {
         swapped = 0;
-        t_dictionary* current = *head;
+        t_dictionary* current = head;
 
         while (current->next != lptr) {
             if (current->nb > current->next->nb)

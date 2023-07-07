@@ -16,7 +16,9 @@ void reverseString(char* str) {
 }
 
 void create_numbers(char* str, int nb, t_dictionary **head) {
-	t_dictionary* entry = (t_dictionary*)malloc(sizeof(t_dictionary));
+	t_dictionary* entry;
+	
+	entry = (t_dictionary*)malloc(sizeof(t_dictionary));
 	entry->nb = nb;
 	reverseString(str);
 	entry->str_number = ft_strdup(str);
@@ -35,7 +37,7 @@ int main(int argc, char* argv[]){
 	char *dictionary_file;
 	char *result = "";
 	char **dictionary_splited;
-	t_dictionary **dictionary;
+	t_dictionary *dictionary;
 	char *str_nb;
 
 	if (argc < 2 || argc > 3) {
@@ -47,7 +49,7 @@ int main(int argc, char* argv[]){
 		int file = open(dictionary_file, O_RDONLY);
 		if(file > 0)
 		{
-			dictionary = malloc(sizeof(t_dictionary));
+			dictionary = NULL;
 			while(result){
 				result = get_next_line(file);
 				if(!result)
@@ -55,25 +57,25 @@ int main(int argc, char* argv[]){
 				if(result[0] == '\n')
 					continue;
 				dictionary_splited = ft_split(result, ':');
-				create_dictionary(dictionary_splited,dictionary);
+				create_dictionary(dictionary_splited, &dictionary);
 			}  
 			bubble_sort(dictionary);
 
-			t_dictionary **number;
+			t_dictionary *number;
 			int i;
 			int j = 0;
 			int k = 1;
 			char *str;
 			
 			if(atoi(str_nb) == 0){
-				print_zero(*dictionary);
+				print_zero(dictionary);
 				exit(1);
 			}
 			str = malloc(sizeof(char));
 			str = "\0";
 			i = ft_strlen(str_nb);
 			i--;
-			number = malloc(sizeof(t_dictionary));
+			number = NULL;
 			while(i >= 0)
 			{
 				str = ft_strjoin(ft_strdup(str), charToString(str_nb[i]));
@@ -82,14 +84,14 @@ int main(int argc, char* argv[]){
 				{
 					if(j == 2)
 						str = ft_strjoin(ft_strdup(str), "0");
-					create_numbers(str, k, number);
+					create_numbers(str, k, &number);
 					str = "\0";
 					k++;
 					j= 0;
 				}
 				i--;
 			}
-			print_dictionary(*number, *dictionary);
+			print_dictionary(number, dictionary);
 		}
 	}
 }

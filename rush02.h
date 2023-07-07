@@ -42,7 +42,7 @@ void    ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t number, size_t size);
 void create_dictionary(char** dictionary_line, t_dictionary **head);
 void    ft_lstadd_back(t_dictionary **lst, t_dictionary *new);
-void bubble_sort(t_dictionary** head);
+void bubble_sort(t_dictionary* head);
 void print_dictionary(t_dictionary* number, t_dictionary* dictionary); //teste de impreção do dicionario
 void	ft_lstadd_front(t_dictionary **lst, t_dictionary *new);
 char* charToString(char c);
