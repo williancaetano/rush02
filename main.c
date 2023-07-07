@@ -45,7 +45,7 @@ int main(int argc, char* argv[]){
 		return 1;
 	}
 	else{
-		verify_number(argc, argv, &dictionary_file, &str_nb);
+		verify_number(argc, argv, &dictionary_file, &str_nb); //ALOCA 
 		int file = open(dictionary_file, O_RDONLY);
 		if(file > 0)
 		{
@@ -57,7 +57,9 @@ int main(int argc, char* argv[]){
 				if(result[0] == '\n')
 					continue;
 				dictionary_splited = ft_split(result, ':');
+                free(result);
 				create_dictionary(dictionary_splited, &dictionary);
+                free(dictionary_splited);
 			}  
 			bubble_sort(dictionary);
 
@@ -92,6 +94,11 @@ int main(int argc, char* argv[]){
 				i--;
 			}
 			print_dictionary(number, dictionary);
+            
+            free1d(dictionary_file);
+            free(dictionary);
+            
 		}
 	}
+    return (0);
 }

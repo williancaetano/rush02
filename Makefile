@@ -1,6 +1,6 @@
 NAME    = rush02
 CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror -g
+CFLAGS  = -Wall -Wextra -Werror -fsanitize=address -fno-omit-frame-pointer -g
 RM      = rm -f
 
 SRC     = main.c \

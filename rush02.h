@@ -30,6 +30,10 @@ char	*ft_strjoin(char *s1, char const *s2);
 
 char	*get_next_line(int fd);
 
+char	**free1d(char *ptr);
+
+char	**free2d(char **pp);
+
 
 void    verify_number(int argc, char *argv[], char **dictionary, char **str);
 int     ft_atoi(const char *str);
