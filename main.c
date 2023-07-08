@@ -1,4 +1,15 @@
-//cmp gcc -o rush-02 main.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rmassiah <rmassiah@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/07 21:49:40 by rmassiah          #+#    #+#             */
+/*   Updated: 2023/07/07 21:52:30 by rmassiah         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rush02.h"
 
 void reverseString(char* str) {
@@ -51,16 +62,18 @@ int main(int argc, char* argv[]){
 		{
 			dictionary = NULL;
 			while(result){
-				result = get_next_line(file);
+				result = get_next_line(file); //maloc em loop]
 				if(!result)
 					break;
-				if(result[0] == '\n')
+				if(result[0] == '\n'){
+					free(result);
 					continue;
+				}
 				dictionary_splited = ft_split(result, ':');
                 free(result);
 				create_dictionary(dictionary_splited, &dictionary);
                 free(dictionary_splited);
-			}  
+			} 
 			bubble_sort(dictionary);
 
 			t_dictionary *number;
@@ -73,30 +86,36 @@ int main(int argc, char* argv[]){
 				print_zero(dictionary);
 				exit(1);
 			}
-			str = malloc(sizeof(char));
-			str = "\0";
+			// str = malloc(sizeof(char));
+			// str = "\0";
 			i = ft_strlen(str_nb);
 			i--;
 			number = NULL;
 			while(i >= 0)
 			{
-				str = ft_strjoin(ft_strdup(str), charToString(str_nb[i]));
+				char *str_aux = charToString(str_nb[i]);
+				char *str_aux2 = ft_strdup(str);
+				//free(str);
+				str = ft_strjoin(str_aux2, str_aux);
+				free(str_aux);
 				j++;
 				if(j == 3 || i == 0 )
 				{
 					if(j == 2)
 						str = ft_strjoin(ft_strdup(str), "0");
 					create_numbers(str, k, &number);
+					//str = malloc(sizeof(char));
 					str = "\0";
 					k++;
 					j= 0;
 				}
-				i--;
+				i--;	
 			}
+			//printf("%s\n", *number);
 			print_dictionary(number, dictionary);
             
             free1d(dictionary_file);
-            free(dictionary);
+            free_dictionary(dictionary);
 		}
 	}
     return (0);

@@ -50,4 +50,5 @@ void bubble_sort(t_dictionary* head);
 void print_dictionary(t_dictionary* number, t_dictionary* dictionary); //teste de impreção do dicionario
 void	ft_lstadd_front(t_dictionary **lst, t_dictionary *new);
 char* charToString(char c);
+void free_dictionary(t_dictionary* head);
 #endif

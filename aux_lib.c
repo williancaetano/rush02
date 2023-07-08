@@ -78,3 +78,16 @@ char	**free2d(char **pp)
 	pp = (void *) 0;
 	return (0);
 }
+
+void free_dictionary(t_dictionary* head) {
+    t_dictionary* current = head;
+    t_dictionary* next;
+	
+    while (current != NULL) {
+        next = current->next;
+        free(current->str_number);
+        free(current);
+        current = next;
+    }
+}
+
