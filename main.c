@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmassiah <rmassiah@student.42.rio>         +#+  +:+       +#+        */
+/*   By: llima-da <llima-da @student.42.rio>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 21:49:40 by rmassiah          #+#    #+#             */
-/*   Updated: 2023/07/07 21:52:30 by rmassiah         ###   ########.fr       */
+/*   Updated: 2023/07/07 22:47:05 by llima-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void create_numbers(char* str, int nb, t_dictionary **head) {
 	entry->str_number = ft_strdup(str);
 	entry->next = NULL;
 
-	free(str);
+	//free(str);
 	ft_lstadd_front(head, entry);
 }
 
@@ -81,41 +81,40 @@ int main(int argc, char* argv[]){
 			int j = 0;
 			int k = 1;
 			char *str;
+			char *str_aux;
 			
 			if(atoi(str_nb) == 0){
 				print_zero(dictionary);
+				free_dictionary(dictionary);
 				exit(1);
 			}
-			// str = malloc(sizeof(char));
-			// str = "\0";
+			str = ft_strdup("\0");
 			i = ft_strlen(str_nb);
 			i--;
 			number = NULL;
 			while(i >= 0)
 			{
-				char *str_aux = charToString(str_nb[i]);
-				char *str_aux2 = ft_strdup(str);
-				//free(str);
-				str = ft_strjoin(str_aux2, str_aux);
+				str_aux = charToString(str_nb[i]);
+				str = ft_strjoin(str, str_aux);
 				free(str_aux);
 				j++;
 				if(j == 3 || i == 0 )
 				{
 					if(j == 2)
-						str = ft_strjoin(ft_strdup(str), "0");
+						str = ft_strjoin(str, "0");
 					create_numbers(str, k, &number);
-					//str = malloc(sizeof(char));
-					str = "\0";
+					free(str);
+					str = ft_strdup("\0");
 					k++;
 					j= 0;
 				}
-				i--;	
+				i--;
 			}
-			//printf("%s\n", *number);
-			print_dictionary(number, dictionary);
-            
+			free(str);
+			print_dictionary(number, dictionary);            
             free1d(dictionary_file);
             free_dictionary(dictionary);
+			free_dictionary(number);
 		}
 	}
     return (0);
