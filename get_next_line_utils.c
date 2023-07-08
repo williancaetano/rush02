@@ -66,6 +66,10 @@ char	*ft_strjoin(char *s1, char const *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = 0;
-	free(s1);
+	if (s1)
+	{
+		free(s1);
+		s1 = NULL;
+	}
 	return (str);
 }

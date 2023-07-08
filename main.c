@@ -1,97 +1,115 @@
-//cmp gcc -o rush-02 main.c
 #include "rush02.h"
 
-void reverseString(char* str) {
-	int length = strlen(str);
-	int start = 0;
-	int end = length - 1;
+char	*g_print_str;
 
-	while (start < end) {
-		char temp = str[start];
-		str[start] = str[end];
-		str[end] = temp;
-		start++;
-		end--;
-	}
-}
-
-void create_numbers(char* str, int nb, t_dictionary **head) {
-	t_dictionary* entry;
-	
-	entry = (t_dictionary*)malloc(sizeof(t_dictionary));
-	entry->nb = nb;
-	reverseString(str);
-	entry->str_number = ft_strdup(str);
-	entry->next = NULL;
-
-	free(str);
-	ft_lstadd_front(head, entry);
-}
-
-void print_zero(t_dictionary *dictionary)
+void	process_number(char	*str_nb, t_dictionary	**number, int i, int j)
 {
-	printf("%s\n", dictionary->str_number);
+	char	*str;
+	int		k;
+	char	*str_aux;
+
+	str = ft_strdup("\0");
+	k = 1;
+	while (i >= 0)
+	{
+		str_aux = char_to_string(str_nb[i]);
+		str = ft_strjoin(str, str_aux);
+		free(str_aux);
+		j++;
+		if (j == 3 || i == 0)
+		{
+			if (j == 2)
+				str = ft_strjoin(str, "0");
+			create_numbers(str, k, number);
+			free(str);
+			str = ft_strdup("\0");
+			k++;
+			j = 0;
+		}
+		i--;
+	}
+	free(str);
 }
 
-int main(int argc, char* argv[]){
-	char *dictionary_file;
-	char *result = "";
-	char **dictionary_splited;
-	t_dictionary *dictionary;
-	char *str_nb;
+void	process_number_i(char	*str_nb, t_dictionary	**number)
+{
+	int		i;
+	int		j;
 
-	if (argc < 2 || argc > 3) {
-		write(1, "Error\n", 6);
-		return 1;
+	i = ft_strlen(str_nb) - 1;
+	j = 0;
+	process_number(str_nb, number, i, j);
+}
+
+void	write_number(t_dictionary *dictionary, char *str_nb)
+{
+	t_dictionary	*number;
+
+	if (ft_atoi(str_nb) == 0)
+	{
+		print_zero(dictionary);
+		free_dictionary(dictionary);
+		exit(1);
 	}
-	else{
+	number = NULL;
+	process_number_i(str_nb, &number);
+	print_dictionary(number, dictionary);
+	free_dictionary(number);
+}
+
+int	set_dictionary(int file, t_dictionary **dictionary)
+{
+	char	*result;
+	char	**dictionary_splited;
+	int		i;
+
+	result = "";
+	i = 1;
+	while (result)
+	{
+		result = get_next_line(file);
+		if (!result)
+			break ;
+		if (result[0] == '\n')
+		{
+			free(result);
+			continue ;
+		}
+		dictionary_splited = ft_split(result, ':');
+		free(result);
+		if (create_dictionary(dictionary_splited, dictionary))
+			i = 0;
+		free(dictionary_splited);
+	}
+	bubble_sort(*dictionary);
+	return (i);
+}
+
+int	main(int argc, char *argv[])
+{
+	char			*dictionary_file;
+	t_dictionary	*dictionary;
+	char			*str_nb;
+	int				file;
+
+	if (verify_args(argc, argv))
+		return (1);
+	else
+	{
 		verify_number(argc, argv, &dictionary_file, &str_nb);
-		int file = open(dictionary_file, O_RDONLY);
-		if(file > 0)
+		file = open(dictionary_file, O_RDONLY);
+		if (file > 0)
 		{
 			dictionary = NULL;
-			while(result){
-				result = get_next_line(file);
-				if(!result)
-					break;
-				if(result[0] == '\n')
-					continue;
-				dictionary_splited = ft_split(result, ':');
-				create_dictionary(dictionary_splited, &dictionary);
-			}  
-			bubble_sort(dictionary);
-
-			t_dictionary *number;
-			int i;
-			int j = 0;
-			int k = 1;
-			char *str;
-			
-			if(atoi(str_nb) == 0){
-				print_zero(dictionary);
-				exit(1);
-			}
-			str = malloc(sizeof(char));
-			str = "\0";
-			i = ft_strlen(str_nb);
-			i--;
-			number = NULL;
-			while(i >= 0)
-			{
-				str = ft_strjoin(ft_strdup(str), charToString(str_nb[i]));
-				j++;
-				if(j == 3 || i == 0 )
-				{
-					if(j == 2)
-						str = ft_strjoin(ft_strdup(str), "0");
-					create_numbers(str, k, &number);
-					str = "\0";
-					k++;
-					j= 0;
-				}
-				i--;
-			}
-			print_dictionary(number, dictionary);
+			if (set_dictionary(file, &dictionary))
+				write_number(dictionary, str_nb);
+			else
+				write(1, "Dict Error\n", ft_strlen("Dict Error\n"));
+			free_file_name(dictionary_file);
+			free_dictionary(dictionary);
 		}
+		else
+			write(1, "Dict Error\n", ft_strlen("Dict Error\n"));
 	}
+	return (0);
 }

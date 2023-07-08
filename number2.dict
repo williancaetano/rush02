@@ -1,5 +1,6 @@
 1000000000: billion
 
+
 3: three
 4: four
 
@@ -29,7 +30,7 @@
 19: nineteen
 20: twenty
 30: thirty
-40: forty
+40: carro
 50: fifty
 60: sixty
 
@@ -43,3 +44,4 @@
 100: hundred
 1000: thousand
 1000000: million
+

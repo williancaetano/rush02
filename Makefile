@@ -8,8 +8,14 @@ SRC     = main.c \
 			get_next_line.c \
 			get_next_line_utils.c \
 			utils.c \
-			ft_split.c
-			
+			utils2.c \
+			utils3.c \
+			utils4.c \
+			print_utils.c \
+			print_utils2.c \
+			ft_put_str.c \
+			frees.c \
+			ft_split.c			
 
 OBJS    = $(SRC:.c=.o)
 
@@ -21,14 +27,11 @@ $(NAME):	$(OBJS)
 
 all:    $(NAME)
 
-
 clean:
 		$(RM) $(OBJS)
-		
 
 fclean: clean
 		$(RM) $(NAME) 
-		
 
 re:     fclean all
 
