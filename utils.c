@@ -53,15 +53,17 @@ char	*ft_epur_str_i(char *content)
 	return (ft_epur_str(content, i, j));
 }
 
-void	create_dictionary(char **dictionary_line, t_dictionary	**head)
+int	create_dictionary(char **dictionary_line, t_dictionary	**head)
 {
 	t_dictionary	*entry;
 	char			*str_aux_epur;
 	char			*str_aux_epur1;
+	long int		i;
 
 	entry = (t_dictionary *)malloc(sizeof(t_dictionary));
 	str_aux_epur = ft_epur_str_i(dictionary_line[0]);
 	entry->nb = ft_atoi(str_aux_epur);
+	i = ft_atol(str_aux_epur);
 	str_aux_epur1 = ft_epur_str_i(dictionary_line[1]);
 	entry->str_number = ft_strtrim(str_aux_epur1, "\n");
 	entry->next = NULL;
@@ -70,6 +72,10 @@ void	create_dictionary(char **dictionary_line, t_dictionary	**head)
 	free(str_aux_epur);
 	free(str_aux_epur1);
 	ft_lstadd_front(head, entry);
+	if (i > INT_MAX)
+		return (1);
+	else
+		return (0);
 }
 
 void	reverse_string(char *str)

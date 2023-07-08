@@ -55,12 +55,14 @@ void	write_number(t_dictionary *dictionary, char *str_nb)
 	free_dictionary(number);
 }
 
-void	set_dictionary(int file, t_dictionary **dictionary)
+int	set_dictionary(int file, t_dictionary **dictionary)
 {
 	char	*result;
 	char	**dictionary_splited;
+	int		i;
 
 	result = "";
+	i = 1;
 	while (result)
 	{
 		result = get_next_line(file);
@@ -73,9 +75,12 @@ void	set_dictionary(int file, t_dictionary **dictionary)
 		}
 		dictionary_splited = ft_split(result, ':');
 		free(result);
-		create_dictionary(dictionary_splited, dictionary);
+		if (create_dictionary(dictionary_splited, dictionary))
+			i = 0;
 		free(dictionary_splited);
 	}
+	bubble_sort(*dictionary);
+	return (i);
 }
 
 int	main(int argc, char *argv[])
@@ -85,11 +90,8 @@ int	main(int argc, char *argv[])
 	char			*str_nb;
 	int				file;
 
-	if (argc < 2 || argc > 3)
-	{
-		write(1, "Error\n", 6);
+	if (verify_args(argc, argv))
 		return (1);
-	}
 	else
 	{
 		verify_number(argc, argv, &dictionary_file, &str_nb);
@@ -97,12 +99,15 @@ int	main(int argc, char *argv[])
 		if (file > 0)
 		{
 			dictionary = NULL;
-			set_dictionary(file, &dictionary);
-			bubble_sort(dictionary);
-			write_number(dictionary, str_nb);
+			if (set_dictionary(file, &dictionary))
+				write_number(dictionary, str_nb);
+			else
+				write(1, "Dict Error\n", ft_strlen("Dict Error\n"));
 			free_file_name(dictionary_file);
 			free_dictionary(dictionary);
 		}
+		else
+			write(1, "Dict Error\n", ft_strlen("Dict Error\n"));
 	}
 	return (0);
 }
