@@ -12,15 +12,16 @@ void	ft_put_str(const char *str)
 	}
 }
 
-void	ft_put_str_space(const char *str)
+void	ft_put_str_space(char *str)
 {
-	if (str != NULL)
+	extern char	*g_print_str;
+
+	if (g_print_str == NULL)
+		g_print_str = ft_strjoin(ft_strdup(str), " ");
+	else
 	{
-		while (*str != '\0')
-		{
-			write(1, str, 1);
-			str++;
-		}
-		write(1, " ", 1);
+		str = ft_strjoin(ft_strdup(str), " ");
+		g_print_str = ft_strjoin(g_print_str, str);
+		free(str);
 	}
 }

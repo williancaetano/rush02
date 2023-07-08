@@ -1,5 +1,7 @@
 #include "rush02.h"
 
+char	*g_print_str;
+
 void	process_number(char	*str_nb, t_dictionary	**number, int i, int j)
 {
 	char	*str;

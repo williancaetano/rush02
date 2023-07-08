@@ -59,11 +59,15 @@ int	create_dictionary(char **dictionary_line, t_dictionary	**head)
 	char			*str_aux_epur;
 	char			*str_aux_epur1;
 	long int		i;
+	int				j;
 
+	j = 0;
 	entry = (t_dictionary *)malloc(sizeof(t_dictionary));
 	str_aux_epur = ft_epur_str_i(dictionary_line[0]);
 	entry->nb = ft_atoi(str_aux_epur);
 	i = ft_atol(str_aux_epur);
+	if (ft_isdigit(str_aux_epur) == 0)
+		j = 1;
 	str_aux_epur1 = ft_epur_str_i(dictionary_line[1]);
 	entry->str_number = ft_strtrim(str_aux_epur1, "\n");
 	entry->next = NULL;
@@ -72,7 +76,7 @@ int	create_dictionary(char **dictionary_line, t_dictionary	**head)
 	free(str_aux_epur);
 	free(str_aux_epur1);
 	ft_lstadd_front(head, entry);
-	if (i > INT_MAX)
+	if (i > INT_MAX || j == 1)
 		return (1);
 	else
 		return (0);

@@ -20,7 +20,7 @@ typedef struct s_dictionary{
 
 size_t		ft_strlen(const char *s);
 void		ft_put_str(const char *str);
-void		ft_put_str_space(const char *str);
+void		ft_put_str_space(char *str);
 char		*ft_strchr(const char *str, int c);
 char		*ft_strdup(const char *src);
 char		*ft_strjoin(char *s1, char const *s2);
@@ -54,4 +54,5 @@ void		print_100_i(char *number, t_dictionary *dictionary);
 void		print_hundred(char number, t_dictionary *dictionary);
 void		print_sufix(int nb, t_dictionary *dictionary);
 int			verify_args(int argc, char **argv);
+int			ft_isdigit(char *str);
 #endif
