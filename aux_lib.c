@@ -11,7 +11,7 @@ int	ft_atoi(const char *str)
 		i++;
 	sign = 1;
 	if (str[i] == '-')
-			sign = sign * (-1);
+		sign = sign * (-1);
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	num = 0;

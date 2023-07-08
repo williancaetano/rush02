@@ -7,7 +7,7 @@ void	print_dictionary(t_dictionary *number, t_dictionary *dictionary)
 	current = number;
 	while (current != NULL)
 	{
-		print_100(current->str_number, dictionary);
+		print_100_i(current->str_number, dictionary);
 		if (ft_atoi(current->str_number) != 0)
 			print_sufix(current->nb, dictionary);
 		current = current->next;

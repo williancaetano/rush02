@@ -29,14 +29,8 @@ void	print_hundred(char number, t_dictionary *dictionary)
 	}
 }
 
-void	print_100(char *number, t_dictionary *dictionary)
+void	print_100(char *number, t_dictionary *dictionary, int nb, char *str_aux)
 {
-	int		nb;
-	char	*str_aux;
-
-	nb = ft_atoi(number);
-	if (nb == 0)
-		return ;
 	if (nb > 99)
 	{
 		print_hundred(number[0], dictionary);
@@ -59,9 +53,7 @@ void	print_100(char *number, t_dictionary *dictionary)
 		}
 	}
 	if (nb < 20)
-	{
 		print_number(nb, dictionary);
-	}
 }
 
 void	print_number(int number, t_dictionary *dictionary)

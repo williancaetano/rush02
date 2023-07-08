@@ -30,7 +30,7 @@ void	verify_number(int argc, char *argv[], char **dictionary, char **str);
 int		ft_atoi(const char *str);
 char	*ft_strdup(const char *src);
 char	*get_next_line(int fd);
-char	*ft_epur_str(char *content);
+char	*ft_epur_str(char *content, int i, int j);
 char	**ft_split(const char *s, char c);
 char	*ft_strtrim(char const *s1, char const *set);
 void	ft_bzero(void *s, size_t n);
@@ -46,7 +46,9 @@ void	print_number(int number, t_dictionary *dictionary);
 void	reverse_string(char *str);
 void	create_numbers(char *str, int nb, t_dictionary **head);
 void	print_zero(t_dictionary *dictionary);
-void	print_100(char *number, t_dictionary *dictionary);
+void	print_100(char *number, t_dictionary *dictionary,
+			int nb, char *str_aux);
+void	print_100_i(char *number, t_dictionary *dictionary);
 void	print_hundred(char number, t_dictionary *dictionary);
 void	print_sufix(int nb, t_dictionary *dictionary);
 #endif

@@ -1,16 +1,12 @@
 #include "rush02.h"
 
-void	process_number(char	*str_nb, t_dictionary	**number)
+void	process_number(char	*str_nb, t_dictionary	**number, int i, int j)
 {
 	char	*str;
-	int		i;
-	int		j;
 	int		k;
 	char	*str_aux;
 
 	str = ft_strdup("\0");
-	i = ft_strlen(str_nb) - 1;
-	j = 0;
 	k = 1;
 	while (i >= 0)
 	{
@@ -33,6 +29,16 @@ void	process_number(char	*str_nb, t_dictionary	**number)
 	free(str);
 }
 
+void	process_number_i(char	*str_nb, t_dictionary	**number)
+{
+	int		i;
+	int		j;
+
+	i = ft_strlen(str_nb) - 1;
+	j = 0;
+	process_number(str_nb, number, i, j);
+}
+
 void	write_number(t_dictionary *dictionary, char *str_nb)
 {
 	t_dictionary	*number;
@@ -44,7 +50,7 @@ void	write_number(t_dictionary *dictionary, char *str_nb)
 		exit(1);
 	}
 	number = NULL;
-	process_number(str_nb, &number);
+	process_number_i(str_nb, &number);
 	print_dictionary(number, dictionary);
 	free_dictionary(number);
 }

@@ -1,6 +1,6 @@
 NAME    = rush02
 CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror -g -fsanitize=address -fno-omit-frame-pointer 
+CFLAGS  = -Wall -Wextra -Werror -g
 RM      = rm -f
 
 SRC     = main.c \
@@ -10,11 +10,12 @@ SRC     = main.c \
 			utils.c \
 			utils2.c \
 			utils3.c \
+			utils4.c \
 			print_utils.c \
+			print_utils2.c \
 			ft_put_str.c \
 			frees.c \
-			ft_split.c
-			
+			ft_split.c			
 
 OBJS    = $(SRC:.c=.o)
 
@@ -26,14 +27,11 @@ $(NAME):	$(OBJS)
 
 all:    $(NAME)
 
-
 clean:
 		$(RM) $(OBJS)
-		
 
 fclean: clean
 		$(RM) $(NAME) 
-		
 
 re:     fclean all
 

@@ -15,16 +15,12 @@ void	verify_number(int argc, char *argv[], char **dictionary, char **str_nb)
 	(void)dictionary;
 }
 
-char	*ft_epur_str(char *content)
+char	*ft_epur_str(char *content, int i, int j)
 {
 	char	*new_content;
-	int		i;
-	int		j;
 	int		flag;
 	char	*str_aux_trim;
 
-	i = 0;
-	j = 0;
 	flag = 0;
 	while (content[i] == ' ' || content[i] == '\t')
 		i++;
@@ -47,6 +43,16 @@ char	*ft_epur_str(char *content)
 	return (str_aux_trim);
 }
 
+char	*ft_epur_str_i(char *content)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	return (ft_epur_str(content, i, j));
+}
+
 void	create_dictionary(char **dictionary_line, t_dictionary	**head)
 {
 	t_dictionary	*entry;
@@ -54,9 +60,9 @@ void	create_dictionary(char **dictionary_line, t_dictionary	**head)
 	char			*str_aux_epur1;
 
 	entry = (t_dictionary *)malloc(sizeof(t_dictionary));
-	str_aux_epur = ft_epur_str(dictionary_line[0]);
+	str_aux_epur = ft_epur_str_i(dictionary_line[0]);
 	entry->nb = ft_atoi(str_aux_epur);
-	str_aux_epur1 = ft_epur_str(dictionary_line[1]);
+	str_aux_epur1 = ft_epur_str_i(dictionary_line[1]);
 	entry->str_number = ft_strtrim(str_aux_epur1, "\n");
 	entry->next = NULL;
 	free(dictionary_line[0]);
@@ -64,16 +70,6 @@ void	create_dictionary(char **dictionary_line, t_dictionary	**head)
 	free(str_aux_epur);
 	free(str_aux_epur1);
 	ft_lstadd_front(head, entry);
-}
-
-char	*char_to_string(char c)
-{
-	char	*str;
-
-	str = malloc(2 * sizeof(char));
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
 }
 
 void	reverse_string(char *str)
